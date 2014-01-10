@@ -22,7 +22,7 @@ API username and the API password for either your live or test accounts:
 
     ChargeIO::setCredentials(new ChargeIO_UsernamePasswordCredentials('<auth_key>', '<auth_pass>'));
 
-Once your credentials, running a basic credit card charge looks like:
+Once your credentials are set, running a basic credit card charge looks like:
 
     $card = new ChargeIO_Card(array('number' => '4242424242424242', 'exp_month' => 10, 'exp_year' => '2016'));
     $charge = ChargeIO_Charge::create($card, 1200);
