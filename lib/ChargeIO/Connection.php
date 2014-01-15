@@ -15,8 +15,12 @@ class ChargeIO_Connection {
 		return $this->request('POST', $path, $params);
 	}
 
-	public function put($path, $obj, $params) {
+	public function put($path, $params) {
 		return $this->request('PUT', $path, $params);
+	}
+	
+	public function delete($path) {
+		return $this->request('DELETE', $path, null);
 	}
 
 	private function request($method, $path, $params) {
@@ -58,6 +62,9 @@ class ChargeIO_Connection {
 				$headers[] = 'Content-Type: application/json';
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonRequest);
+				break;
+			case 'DELETE':
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 				break;
 		}
 

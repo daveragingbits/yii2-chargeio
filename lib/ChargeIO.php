@@ -28,6 +28,9 @@ require(dirname(__FILE__) . '/ChargeIO/Utils.php');
 
 // Models
 require(dirname(__FILE__) . '/ChargeIO/Object.php');
+require(dirname(__FILE__) . '/ChargeIO/Merchant.php');
+require(dirname(__FILE__) . '/ChargeIO/MerchantAccount.php');
+require(dirname(__FILE__) . '/ChargeIO/AchAccount.php');
 require(dirname(__FILE__) . '/ChargeIO/Transaction.php');
 require(dirname(__FILE__) . '/ChargeIO/Charge.php');
 require(dirname(__FILE__) . '/ChargeIO/Refund.php');
@@ -38,3 +41,5 @@ require(dirname(__FILE__) . '/ChargeIO/Card.php');
 require(dirname(__FILE__) . '/ChargeIO/Bank.php');
 require(dirname(__FILE__) . '/ChargeIO/List.php');
 require(dirname(__FILE__) . '/ChargeIO/TransactionList.php');
+require(dirname(__FILE__) . '/ChargeIO/BankList.php');
+require(dirname(__FILE__) . '/ChargeIO/CardList.php');
