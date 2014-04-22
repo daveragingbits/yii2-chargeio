@@ -30,7 +30,7 @@ class ChargeIO_Connection {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, ChargeIO::$apiUrl . $path);
 		curl_setopt($ch, CURLOPT_USERAGENT, "ChargeIO PHP Client v" . ChargeIO::VERSION);
-		curl_setopt($ch, CURLOPT_USERPWD, $this->credentials->getUsername() . ':' . $this->credentials->getPassword());
+		curl_setopt($ch, CURLOPT_USERPWD, $this->credentials->getSecretKey() . ':');
 		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($ch, CURLOPT_HEADER, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

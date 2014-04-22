@@ -22,7 +22,6 @@ require(dirname(__FILE__) . '/ChargeIO/InvalidRequestError.php');
 
 // Infrastructure
 require(dirname(__FILE__) . '/ChargeIO/Credentials.php');
-require(dirname(__FILE__) . '/ChargeIO/UsernamePasswordCredentials.php');
 require(dirname(__FILE__) . '/ChargeIO/Connection.php');
 require(dirname(__FILE__) . '/ChargeIO/Utils.php');
 

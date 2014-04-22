@@ -18,9 +18,9 @@ The library's APIs require credentials to access your merchant data on the
 ChargeIO servers. You can provide credentials as arguments to the APIs used to
 retrieve objects, or you can configure the library with default credentials to
 use when necessary. To set the default credentials, substitute your ChargeIO
-API username and the API password for either your live or test accounts:
+public key and test or live-mode secret key in a call to setCredentials:
 
-    ChargeIO::setCredentials(new ChargeIO_UsernamePasswordCredentials('<auth_key>', '<auth_pass>'));
+    ChargeIO::setCredentials(new ChargeIO_Credentials('<public_key>', '<secret_key>'));
 
 Once your credentials are set, running a basic credit card charge looks like:
 
@@ -38,4 +38,4 @@ POST the token ID you receive to your PHP script and then perform the charge:
 Documentation
 -----------
 
-The latest ChargeIO API documentation is available at https://chargeio.com/docs/merchant/index.html.
+The latest ChargeIO API documentation is available at https://chargeio.com/developers.
