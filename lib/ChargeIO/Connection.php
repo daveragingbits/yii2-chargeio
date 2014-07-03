@@ -18,6 +18,10 @@ class ChargeIO_Connection {
 	public function put($path, $params) {
 		return $this->request('PUT', $path, $params);
 	}
+
+	public function patch($path, $params) {
+		return $this->request('PATCH', $path, $params);
+	}
 	
 	public function delete($path) {
 		return $this->request('DELETE', $path, null);
@@ -63,6 +67,13 @@ class ChargeIO_Connection {
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonRequest);
 				break;
+			case 'PATCH':
+				$jsonRequest = json_encode($params);
+				$headers[] = 'Content-Length: ' . strlen($jsonRequest);
+				$headers[] = 'Content-Type: application/json';
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonRequest);
+				break;
 			case 'DELETE':
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 				break;
@@ -72,7 +83,7 @@ class ChargeIO_Connection {
 
 		if (ChargeIO::$debug) {
 			error_log("\n--------- Request ----------\n");
-			error_log("-- url: " . ChargeIO::$apiUrl . $path . "\n");
+			error_log("-- " . $method . ": " . ChargeIO::$apiUrl . $path . "\n");
 			error_log("-- jsonRequest: " . $jsonRequest . "\n");
 			error_log("\n-----------------------------\n");
 		}
