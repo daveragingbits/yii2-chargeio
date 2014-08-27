@@ -23,7 +23,7 @@ class RecurringChargeTest extends ChargeIO_TestCase
 		
 		// Retrieve occurrences -- should just be the first pending occurrence
 		$occs = $rc->occurrences();
-		$this->assertEquals(1, count($occs));
+		$this->assertEquals(1, $occs->getTotalEntries());
 		
 		$occ = $occs[0];
 		$this->assertEquals('PENDING', $occ->status);
@@ -36,7 +36,7 @@ class RecurringChargeTest extends ChargeIO_TestCase
 		
 		// We now have two occurrences. Mark the new pending occurrence ignored.
 		$occs = $rc->occurrences();
-		$this->assertEquals(1, count($occs));
+		$this->assertEquals(2, $occs->getTotalEntries());
 		
 		$occ = $occs[0];
 		$this->assertEquals('PENDING', $occ->status);
@@ -66,5 +66,36 @@ class RecurringChargeTest extends ChargeIO_TestCase
 		// Delete the recurring charge
 		$rc->delete();
 		$this->assertEquals('DELETED', $rc->status);
+	}
+	
+	public function testRecurringFromCharge() {
+		$m = ChargeIO_Merchant::findCurrent();
+		$accounts = $m->merchantAccounts();
+		$account = reset($accounts);
+
+		// Create a recurring charge from a new charge with a schedule
+		$card = $this->newCard();
+		$charge = ChargeIO_Charge::create($card, 10000, array(
+			'account_id' => $account->id,
+			'recur' => array(
+				'interval_unit' => 'WEEK',
+				'interval_delay' => 1
+			)
+		));
+		$this->assertNotNull($charge);
+		$this->assertEquals('AUTHORIZED', $charge->status);
+		$this->assertNotNull($charge->recurring_charge_id);
+		$this->assertNotNull($charge->recurring_charge_occurrence_id);
+		
+		// Retrieve occurrences -- should contain the initial paid occurrence associated with the charge and the next pending occurrence
+		$rc = ChargeIO_RecurringCharge::findById($charge->recurring_charge_id);
+		$this->assertNotNull($rc);
+		$occs = $rc->occurrences();
+		$this->assertEquals(2, $occs->getTotalEntries());
+		
+		$this->assertEquals('PENDING', $occs[0]->status);
+		$this->assertEquals('PAID', $occs[1]->status);
+		$this->assertEquals(1, count($occs[1]->transactions));
+		$this->assertEquals($charge->id, $occs[1]->transactions[0]['id']);
 	}
 }
