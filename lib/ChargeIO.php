@@ -30,6 +30,7 @@ require(dirname(__FILE__) . '/ChargeIO/Object.php');
 require(dirname(__FILE__) . '/ChargeIO/Merchant.php');
 require(dirname(__FILE__) . '/ChargeIO/MerchantAccount.php');
 require(dirname(__FILE__) . '/ChargeIO/AchAccount.php');
+require(dirname(__FILE__) . '/ChargeIO/Signature.php');
 require(dirname(__FILE__) . '/ChargeIO/Transaction.php');
 require(dirname(__FILE__) . '/ChargeIO/Charge.php');
 require(dirname(__FILE__) . '/ChargeIO/Refund.php');

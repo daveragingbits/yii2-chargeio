@@ -38,4 +38,14 @@ class ChargeIO_Transaction extends ChargeIO_Object {
 		$response = $this->connection->post('/transactions/' . $this->id . '/void', $params);
 		$this->updateAttributes($response);
 	}
+	
+	public function sign($signature, $gratuity = NULL, $mime_type = 'chargeio/jsignature', $params = array()) {
+		$params['data'] = $signature;
+		$params['mime_type'] = $mime_type;
+		if ($gratuity) {
+			$params['gratuity'] = $gratuity;
+		}
+		$response = $this->connection->post('/transactions/' . $this->id . '/sign', $params);
+		$this->updateAttributes($response);
+	}
 }

@@ -97,5 +97,16 @@ class RecurringChargeTest extends ChargeIO_TestCase
 		$this->assertEquals('PAID', $occs[1]->status);
 		$this->assertEquals(1, count($occs[1]->transactions));
 		$this->assertEquals($charge->id, $occs[1]->transactions[0]['id']);
+
+		$transaction_id = $occs[1]->transactions[sizeof($occs[1]->transactions) - 1]['id'];
+		$this->assertNotNull($transaction_id);
+
+		$c = new ChargeIO_Charge($occs[1]->transactions[0], new ChargeIO_Connection(ChargeIO::getCredentials()));
+		$this->assertNotNull($c);
+		$this->assertEquals($charge->id, $c->id);
+		$r = $c->refund(10);
+		$this->assertNotNull($r);
+		$this->assertNotNull($r->id);
+
 	}
 }
