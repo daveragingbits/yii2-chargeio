@@ -37,6 +37,7 @@ class ChargeIO_Connection {
 		curl_setopt($ch, CURLOPT_USERPWD, $this->credentials->getSecretKey() . ':');
 		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($ch, CURLOPT_HEADER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 300);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
