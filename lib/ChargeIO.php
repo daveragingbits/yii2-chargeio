@@ -41,6 +41,7 @@ require(dirname(__FILE__) . '/ChargeIO/PaymentMethod.php');
 require(dirname(__FILE__) . '/ChargeIO/PaymentMethodReference.php');
 require(dirname(__FILE__) . '/ChargeIO/Card.php');
 require(dirname(__FILE__) . '/ChargeIO/Bank.php');
+require(dirname(__FILE__) . '/ChargeIO/OneTimeToken.php');
 require(dirname(__FILE__) . '/ChargeIO/List.php');
 require(dirname(__FILE__) . '/ChargeIO/TransactionList.php');
 require(dirname(__FILE__) . '/ChargeIO/RecurringChargeList.php');

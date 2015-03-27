@@ -37,4 +37,33 @@ class TransactionTest extends ChargeIO_TestCase
 		$this->assertEquals('COMPLETED', $charge->status);
 		$this->assertEquals(910, $charge->amount);
 	}
+	
+	public function testHolds() {
+		// New authorization for $20 from one-time card token
+		$token = ChargeIO_OneTimeToken::createOneTimeCard($this->newCard()->attributes);
+		$charge = ChargeIO_Charge::authorize(new ChargeIO_PaymentMethodReference(array('id' => $token->id)), 2000);
+		$this->assertNotNull($charge);
+		$this->assertEquals('AUTHORIZED', $charge->status);
+		$this->assertEquals(false, $charge->auto_capture);
+		
+		
+		// Retrieve first page (most recent) pending holds
+		$holds = ChargeIO_Charge::allHolds();
+		$this->assertGreaterThanOrEqual(1, $holds->getTotalEntries());
+		$this->assertEquals($charge->id, $holds[0]->id);
+		
+		
+		// Convert manual-capture authorization to auto-capture
+		$charge->capture(2000, array('capture_time' => 'NEXT_AUTO_CAPTURE'));
+		$this->assertEquals('AUTHORIZED', $charge->status);
+		$this->assertEquals(true, $charge->auto_capture);
+		
+		
+		// Charge no longer appears in pending holds
+		$holds = ChargeIO_Charge::allHolds();
+		$this->assertGreaterThanOrEqual(0, $holds->getTotalEntries());
+		if ($holds->getTotalEntries() > 0) {
+			$this->assertNotEquals($charge->id, $holds[0]->id);
+		}
+	}
 }

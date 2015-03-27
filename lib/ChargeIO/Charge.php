@@ -39,4 +39,14 @@ class ChargeIO_Charge extends ChargeIO_Transaction {
 		$response = $this->connection->post('/charges/' . $this->id . '/capture', $params);
 		$this->updateAttributes($response);
 	}
+	
+		public static function allHolds($params = array()) {
+		return self::allHoldsUsingCredentials(ChargeIO::getCredentials(), $params);
+	}
+	
+	public static function allHoldsUsingCredentials($credentials, $params = array()) {
+		$conn = new ChargeIO_Connection($credentials);
+		$response = $conn->get('/charges/holds', $params);
+		return new ChargeIO_TransactionList($response, $conn);
+	}
 }

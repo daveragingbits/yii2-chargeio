@@ -10,7 +10,7 @@ class ChargeIO_Transaction extends ChargeIO_Object {
 		$response = $conn->get('/transactions', $params);
 		return new ChargeIO_TransactionList($response, $conn);
 	}
-	
+		
 	public static function findById($id) {
 		return self::findByIdUsingCredentials(ChargeIO::getCredentials(), $id);
 	}
