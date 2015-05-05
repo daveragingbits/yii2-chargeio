@@ -1,0 +1,11 @@
+{
+	"name": "daveragingbits/yii2-chargeio",
+	"description": "chargeio",
+	"type": "yii2-extension",
+	"keywords": ["yii2","extension","chargeio"],
+	"license": "MIT",
+	"minimum-stability": "dev",
+	"autoload": {
+        "files": ["lib/ChargeIO.php"]
+	}
+}

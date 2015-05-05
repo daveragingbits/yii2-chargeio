@@ -1,4 +1,4 @@
-chargeio-php
+yii2-chargeio
 ============
 
 ChargeIO PHP Client Library
@@ -6,13 +6,23 @@ ChargeIO PHP Client Library
 Installation
 -----------
 
-Download the PHP client library by doing the following:
+This extension is a wrapper for [this](https://github.com/charge-io/chargeio-php).
 
-    git clone git://github.com/charge-io/chargeio-php.git
-    
-To use the library in your application, add the following to your PHP script:
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-    require_once '/path/to/chargeio-php/lib/ChargeIO.php';
+Either run
+
+```
+php composer.phar require --prefer-dist daveragingbits/yii2-chargeio "dev-master"
+```
+
+or add
+
+```
+"daveragingbits/yii2-chargeio": "dev-master"
+```
+
+to the require section of your `composer.json` file.
     
 The library's APIs require credentials to access your merchant data on the
 ChargeIO servers. You can provide credentials as arguments to the APIs used to
