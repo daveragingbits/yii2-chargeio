@@ -10,19 +10,23 @@ This extension is a wrapper for [this](https://github.com/charge-io/chargeio-php
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
+Update the repository and require sections of your `composer.json` file:
 
 ```
-php composer.phar require --prefer-dist daveragingbits/yii2-chargeio "dev-master"
+	"repositories": [
+		...
+		{
+			"type": "vcs",
+			"url": "https://github.com/daveragingbits/yii2-chargeio"
+		}
+	],
+	"require": {
+		...
+		"daveragingbits/yii2-chargeio": "@dev"
+	},
 ```
 
-or add
-
-```
-"daveragingbits/yii2-chargeio": "dev-master"
-```
-
-to the require section of your `composer.json` file.
+...then run `composer update`.
     
 The library's APIs require credentials to access your merchant data on the
 ChargeIO servers. You can provide credentials as arguments to the APIs used to
