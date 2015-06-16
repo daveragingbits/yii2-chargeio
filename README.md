@@ -30,6 +30,8 @@ Update the repository and require sections of your `composer.json` file:
 
 Finally, include `use \ChargeIO` wherever you need it.
 
+Note: charge amount is in CENTS (integer).
+
 The library's APIs require credentials to access your merchant data on the
 ChargeIO servers. You can provide credentials as arguments to the APIs used to
 retrieve objects, or you can configure the library with default credentials to
